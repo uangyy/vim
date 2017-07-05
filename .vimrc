@@ -4,17 +4,8 @@
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"set shortmess=atI   " 启动的时候不显示那个援助乌干达儿童的提示  
-
-"winpos 5 5          " 设定窗口位置  
-
-"set lines=40 columns=155    " 设定窗口大小  
-
-"set nu              " 显示行号  
-
 set go=             " 不要图形按钮  
 
-"color asmanian2     " 设置背景主题  
 
 set guifont=Courier_New:h10:cANSI   " 设置字体  
 
@@ -45,8 +36,6 @@ set laststatus=1    " 启动显示状态行(1),总是显示状态行(2)
 set foldenable      " 允许折叠  
 
 set foldmethod=manual   " 手动折叠  
-
-"set background=dark "背景使用黑色 
 
 " 显示中文帮助
 
@@ -251,7 +240,7 @@ func! Rungdb()
     exec "!gdb ./%<"
 
 endfunc
-
+ 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 ""实用设置
@@ -274,7 +263,7 @@ set completeopt=preview,menu
 
 "允许插件  
 
-filetype plugin on
+" filetype plugin on
 
 "共享剪贴板  
 
@@ -294,7 +283,7 @@ set autowrite
 
 set ruler                   " 打开状态栏标尺
 
-"set cursorline              " 突出显示当前行
+" set cursorline              " 突出显示当前行
 
 set magic                   " 设置魔术
 
@@ -417,7 +406,7 @@ filetype on
 
 " 载入文件类型插件
 
-filetype plugin on
+" filetype plugin on
 
 " 为特定文件类型载入相关缩进文件
 
@@ -481,8 +470,8 @@ set smartindent
 
 " 高亮显示普通txt文件（需要txt.vim脚本）
 
-au BufRead,BufNewFile *  setfiletype txt
-
+" au BufRead,BufNewFile *  setfiletype txt
+" 
 "自动补全
 
 ":inoremap ( ()<ESC>i
@@ -515,33 +504,100 @@ function! ClosePair(char)
 
 endfunction
 
+" Pathogen
+execute pathogen#infect()
+
 filetype plugin indent on 
+
+set background=dark "背景使用黑色 
+
+" vim-indent-guides
+let g:indent_guides_enable_on_vim_startup = 1
+" let indent_guides_auto_colors = 0
+" let indent_guides_guide_size = 1
+" hi IndentGuidesOdd ctermbg = 238
+" hi IndentGuidesEven ctermbg = 236
 
 "打开文件类型检测, 加了这句才可以用智能补全
 
 set completeopt=longest,menu
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"其他东东
+" ************** 插件管理与设置 ************ "
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"-- WinManager setting --
-let g:persistentBehaviour=0 " 如果所有编辑文件都关闭了，退出vim
-"nmap wm :WMToggle<cr>
-
-set rtp+=~/.vim/bundle/vundle
+" vundle 环境设置
+" filetype off " vim7 以后此bug修复
+set rtp+=~/.vim/bundle/Vundle.vim
+" vundle 管理的插件列表必须位于 vundle#begin() 和 vundle#end() 之间
 call vundle#begin()
-
-Plugin 'scrooloose/nerdtree'
-Plugin 'majutsushi/tagbar'
-"Plugin 'bling/vim-airline'
-"Plugin 'mattn/emmet-vim'
-
+Plugin 'VundleVim/Vundle.vim'
+" Plugin 'Yggdroot/indentLine'
+" Plugin 'jiangmiao/auto-pairs'
+" Plugin 'tell-k/vim-autopep8'
+" Plugin 'Lokaltog/vim-powerline' "status 美化
+" Plugin 'octol/vim-cpp-enhanced-highlight' "对c++语法高亮增强
+" Plugin 'kshenoy/vim-signature' "书签可视化的插件
+" Plugin 'vim-scripts/BOOKMARKS--Mark-and-Highlight-Full-Lines' "书签行高亮
+Plugin 'majutsushi/tagbar' "taglist的增强版，查看标签，依赖于ctags
+" Plugin 'scrooloose/nerdcommenter' "多行注释，leader键+cc生成, leader+cu删除注释
+" Plugin 'scrooloose/nerdtree' "文件浏览
+" Plugin 'Valloric/YouCompleteMe' "自动补全
+" Plugin 'kien/ctrlp.vim' "搜索历史打开文件，在命令行模式下按ctrl+p触发
+" Plugin 'vim-scripts/grep.vim' "在命令行模式使用grep命令，:Grep
+" Plugin 'Lokaltog/vim-easymotion' "快速跳转，按两下leader键和f组合
+" Plugin 'vim-scripts/ShowTrailingWhitespace.git' "高亮显示行尾的多余空白字符
+" Plugin 'vim-scripts/indentpython.vim.git'
+" Plugin 'vim-scripts/Solarized.git' "主题方案
+Plugin 'nathanaelkane/vim-indent-guides.git' "缩进对齐显示
+" "Plugin 'vim-scripts/indexer.tar.gz' "自动生成标签
+" "Plugin 'vim-scripts/DfrankUtil' "indexer 依赖
+" "Plugin 'vim-scripts/vimprj' "indexer 依赖
+" Plugin 'davidhalter/jedi-vim' "python 补全，不依赖于tags,但比较慢，可以使用indexer替换，但不能跳转项目外
+" Plugin 'vim-scripts/Markdown'
+" Plugin 'tpope/vim-surround'
+" Plugin 'ekalinin/Dockerfile.vim'
+" 插件列表结束
 call vundle#end()
-map <F2> :NERDTreeToggle<CR> 
-let NERDTreeWinSize=25
-map <F1> :TagbarToggle<CR> 
-let g:tagbar_width=20
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" filetype on
+
+" 简要帮助文档
+" :PluginList       - 列出所有已配置的插件
+" :PluginInstall    - 安装插件,追加 `!` 用以更新或使用 :PluginUpdate
+" :PluginSearch foo - 搜索 foo ; 追加 `!` 清除本地缓存
+" :PluginClean      - 清除未使用插件,需要确认; 追加 `!` 自动批准移除未使用插件
+"
+" 查阅 :h vundle 获取更多细节和wiki以及FAQ
+" 将你自己对非插件片段放在这行之后
+
+"" 缩进指示线
+let g:indent_guides_enable_on_vim_startup = 1
+hi IndentGuidesOdd  ctermbg=black
+hi IndentGuidesEven ctermbg=darkgrey
+let g:indent_guides_auto_colors = 0
+
+"" tagbar
+nmap <silent> <F4> :TagbarToggle<CR>
+let g:tagbar_ctags_bin = 'ctags'
+let g:tagbar_width = 60
+
+
+" 设置python的缩进格式，最大宽度
+" autocmd BufNewFile,BufRead *.py
+"             \ set tabstop=4 |
+"             \ set softtabstop=4 |
+"             \ set shiftwidth=4 |
+"             \ set textwidth=79 |
+"             \ set expandtab |
+"             \ set autoindent |
+"             \ set fileformat=unix |
+
+" autocmd Filetype python call SetPythonOptions()
+" function SetPythonOptions()
+"     set tabstop=4
+"     set softtabstop=4
+"     set shiftwidth=4
+"     set textwidth=79
+"     set expandtab
+"     set autoindent
+"     set fileformat=unix
+" endfunction
