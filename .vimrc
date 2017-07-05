@@ -570,10 +570,14 @@ let indent_guides_guide_size = 1
 hi IndentGuidesOdd ctermbg = 235
 hi IndentGuidesEven ctermbg = 233
 
+" Yggdroot/indentLine
+" let g:indentLine_setColors = 0
+" let g:indentLine_color_term = 256
+
 "" tagbar
 nmap <silent> <F4> :TagbarToggle<CR>
 let g:tagbar_ctags_bin = 'ctags'
-let g:tagbar_width = 60
+let g:tagbar_width = 30
 
 
 " 设置python的缩进格式，最大宽度
