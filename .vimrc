@@ -511,12 +511,6 @@ filetype plugin indent on
 
 set background=dark "背景使用黑色 
 
-" vim-indent-guides
-let g:indent_guides_enable_on_vim_startup = 1
-" let indent_guides_auto_colors = 0
-" let indent_guides_guide_size = 1
-" hi IndentGuidesOdd ctermbg = 238
-" hi IndentGuidesEven ctermbg = 236
 
 "打开文件类型检测, 加了这句才可以用智能补全
 
@@ -569,11 +563,12 @@ call vundle#end()
 " 查阅 :h vundle 获取更多细节和wiki以及FAQ
 " 将你自己对非插件片段放在这行之后
 
-"" 缩进指示线
+" vim-indent-guides 缩进指示线
 let g:indent_guides_enable_on_vim_startup = 1
-hi IndentGuidesOdd  ctermbg=black
-hi IndentGuidesEven ctermbg=darkgrey
 let g:indent_guides_auto_colors = 0
+let indent_guides_guide_size = 1
+hi IndentGuidesOdd ctermbg = 235
+hi IndentGuidesEven ctermbg = 233
 
 "" tagbar
 nmap <silent> <F4> :TagbarToggle<CR>
